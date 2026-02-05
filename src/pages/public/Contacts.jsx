@@ -1,6 +1,24 @@
 import { motion } from "framer-motion";
-
+import {useLocation} from "react-router-dom";
+import {useState,useEffect} from "react";
+import {auth,db} from "../../Fireabase/config.js";
+import {collection,addDoc,  query,where,getDocs} from "firebase/firestore";
 export default function Contacts() {
+    const location = useLocation();
+    const [topic,setTopic] = useState("");
+    const [price,setPrice] = useState("");
+
+    useEffect(()=>{
+        if(location.state){
+            setTopic(location.state.topic||" ");
+            setPrice(location.state.price ||" ");
+        }
+    },[location.state])
+    console.log(
+        topic,
+        price
+    )
+
     return (
         <div className="min-h-screen bg-gray-50 py-16 px-4">
             <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
@@ -56,7 +74,20 @@ export default function Contacts() {
                             placeholder="Телефон"
                             className="w-full border px-4 py-2 rounded"
                         />
+                        <input  type="text"
+                                placeholder="Тема заявки"
+                                value={topic}
+                                onChange={(e)=>setTopic(e.target.value)}
 
+                                className="w-full border px-4 py-2 rounded" required/>
+                        <input
+                            type="number"
+                            placeholder="Cтоимость (Т)"
+                            value={price}
+                            onChange={(e)=>setPrice(e.target.value)}
+                            required
+                            className={"w-full border px-4 py-2 rounded" }
+                        />
                         <textarea
                             placeholder="Опишите вашу проблему"
                             className="w-full border px-4 py-2 rounded h-32 resize-none"

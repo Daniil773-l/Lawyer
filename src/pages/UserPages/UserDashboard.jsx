@@ -48,6 +48,7 @@ export default function UserDashboard() {
                     <h2 className={"text-2xl font-semibold mb-4"}>Мои данные</h2>
                     <p><strong>Имя: </strong>{userData?.name}</p>
                     <p><strong>Email: </strong>{userData?.email}</p>
+                    <p><strong>Surname: </strong>{userData?.surname}</p>
                 </div>
 
                 <div className={"bg-white p-6 rounded-lg shadow"}>
