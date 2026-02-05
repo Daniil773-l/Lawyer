@@ -28,13 +28,13 @@ export default function UserDashboard() {
         loadData();
     }, []);
     if (loading) {
-
+        return (
+            <div className={"min-h-screen flex items-center justify-center "}>
+                <p className={"text-xl"}>ЗАГРУЗУКА</p>
+            </div>
+        );
     }
-    return (
-        <div className={"min-h-screen flex items-center justify-center "}>
-            <p className={"text-xl"}>ЗАГРУЗУКА</p>
-        </div>
-    );
+
     return (
         <div className={"min-h-screen bg-gray-50 py-16 px-4"}>
             <div className={"max-w-5xl mx-auto"}>

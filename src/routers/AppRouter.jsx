@@ -21,7 +21,7 @@ export default function AppRoutes() {
                     <Route path="/auth" element={<AuthPage/>}/>
                     <Route path="/prices" element={<Prices/>}/>
                     <Route path="/contacts" element={<Contacts/>}/>
-                    <Route path"/profile" element={<ProtectedRoute role="user"><UserDashboard/></ProtectedRoute>}/>
+                    <Route path="/profile" element={<ProtectedRoute role="user"><UserDashboard/></ProtectedRoute>}/>
                 </Route>
             </Routes>
             </AuthProvider>
