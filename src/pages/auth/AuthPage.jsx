@@ -1,9 +1,15 @@
 import { useState } from "react";
+import {auth ,db} from "../../Fireabase/config.js";
+import {signInWithEmailAndPassword,createUserWithEmailAndPassword} from "firebase/auth";
+import {setDoc,doc} from "firebase/firestore";
 import { motion } from "framer-motion";
 import { IMaskInput } from "react-imask";
 
 export default function AuthPage() {
     const [isLogin, setIsLogin] = useState(true);
+    const [email,serEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const [name ,setName] = useState("");
     const [phone, setPhone] = useState("");
 
     const handleSubmit = (e) => {
