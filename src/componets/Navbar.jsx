@@ -21,6 +21,7 @@ export default function Navbar() {
                     <Link to="/about" className="hover:text-blue-600">О нас</Link>
                     <Link to="/prices" className="hover:text-blue-600">Цены</Link>
                     <Link to="/contacts" className="hover:text-blue-600">Контакты</Link>
+                    <Link to="/admin/requests" className="hover:text-blue-600">Заявки</Link>
 
                     {/* КНОПКА ВХОДА */}
                     {!user && (
