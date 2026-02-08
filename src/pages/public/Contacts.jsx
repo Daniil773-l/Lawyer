@@ -1,23 +1,63 @@
 import { motion } from "framer-motion";
-import {useLocation} from "react-router-dom";
-import {useState,useEffect} from "react";
-import {auth,db} from "../../Fireabase/config.js";
-import {collection,addDoc,  query,where,getDocs} from "firebase/firestore";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+// import {auth,db} from "../../Fireabase/config.js";
+// import {collection,addDoc,  query,where,getDocs} from "firebase/firestore";
+
 export default function Contacts() {
     const location = useLocation();
-    const [topic,setTopic] = useState("");
-    const [price,setPrice] = useState("");
 
-    useEffect(()=>{
-        if(location.state){
-            setTopic(location.state.topic||" ");
-            setPrice(location.state.price ||" ");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [topic, setTopic] = useState("");
+    const [price, setPrice] = useState("");
+    const [message, setMessage] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        const res = await fetch("http://localhost:8000/api/contact/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name,
+                email,
+                phone,
+                topic,
+                price,
+                message
+            })
+        })
+
+        const data = await res.json()
+
+        console.log(data)
+
+        if (res.ok) {
+            alert("Заявка отправлена")
+
+            setName("")
+            setEmail("")
+            setPhone("")
+            setTopic("")
+            setPrice("")
+            setMessage("")
+        } else {
+            alert("Ошибка отправки")
         }
-    },[location.state])
-    console.log(
-        topic,
-        price
-    )
+    }
+
+    // useEffect(() => {
+    //     if (location.state) {
+    //         setTopic(location.state.topic || " ");
+    //         setPrice(location.state.price || " ");
+    //     }
+    // }, [location.state])
+    // console.log(
+    //     topic,
+    //     price
+    // )
 
     return (
         <div className="min-h-screen bg-gray-50 py-16 px-4">
@@ -54,44 +94,52 @@ export default function Contacts() {
                         Оставить заявку
                     </h2>
 
-                    <form className="space-y-4">
+                    <form className="space-y-4" onSubmit={handleSubmit}>
                         <input
                             type="text"
                             placeholder="Ваше имя"
                             className="w-full border px-4 py-2 rounded"
                             required
+                            value={name}
+                            onChange={e => setName(e.target.value)}
                         />
-
                         <input
                             type="email"
                             placeholder="Email"
                             className="w-full border px-4 py-2 rounded"
                             required
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
                         />
-
                         <input
                             type="tel"
                             placeholder="Телефон"
                             className="w-full border px-4 py-2 rounded"
+                            value={phone}
+                            onChange={e => setPhone(e.target.value)}
                         />
-                        <input  type="text"
-                                placeholder="Тема заявки"
-                                value={topic}
-                                onChange={(e)=>setTopic(e.target.value)}
-
-                                className="w-full border px-4 py-2 rounded" required/>
+                        <input
+                            type="text"
+                            placeholder="Тема заявки"
+                            value={topic}
+                            onChange={(e) => setTopic(e.target.value)}
+                            className="w-full border px-4 py-2 rounded"
+                            required
+                        />
                         <input
                             type="number"
                             placeholder="Cтоимость (Т)"
                             value={price}
-                            onChange={(e)=>setPrice(e.target.value)}
+                            onChange={(e) => setPrice(e.target.value)}
                             required
-                            className={"w-full border px-4 py-2 rounded" }
+                            className={"w-full border px-4 py-2 rounded"}
                         />
                         <textarea
                             placeholder="Опишите вашу проблему"
                             className="w-full border px-4 py-2 rounded h-32 resize-none"
                             required
+                            value={message}
+                            onChange={e => setMessage(e.target.value)}
                         />
 
                         <button

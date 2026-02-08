@@ -9,6 +9,7 @@ import AuthPage from "../pages/auth/AuthPage.jsx";
 import Prices from "../pages/public/Prices.jsx";
 import Contacts from "../pages/public/Contacts.jsx";
 import UserDashboard from "../pages/UserPages/UserDashboard.jsx";
+import AdminRequests from "../pages/public/AdminRequests.jsx";
 export default function AppRoutes() {
     return (
         <BrowserRouter>
@@ -22,6 +23,7 @@ export default function AppRoutes() {
                     <Route path="/prices" element={<Prices/>}/>
                     <Route path="/contacts" element={<Contacts/>}/>
                     <Route path="/profile" element={<ProtectedRoute role="user"><UserDashboard/></ProtectedRoute>}/>
+                    <Route path="/admin/requests" element={<AdminRequests />} />
                 </Route>
             </Routes>
             </AuthProvider>
